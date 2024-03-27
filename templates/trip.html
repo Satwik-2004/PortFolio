@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Lodger</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trip Lodger</h1>
+    <h2>Add New Trip</h2>
+    <form action="/add_trip" method="post">
+        <label for="destination">Destination:</label><br>
+        <input type="text" id="destination" name="destination" required><br>
+        <label for="S_date">Start Date:</label><br>
+        <input type="date" id="S_date" name="S_date" required><br>
+        <label for="R_date">End Date:</label><br>
+        <input type="date" id="R_date" name="R_date" required><br><br>
+        <input type="submit" value="Add Trip">
+    </form>
+
+    <h2>Trips</h2>
+    <table>
+        <tr>
+            <th>Destination</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+        {% for trip in trips %}
+        <tr>
+            <td>{{ trip['destination'] }}</td>
+            <td>{{ trip['S_date'] }}</td>
+            <td>{{ trip['R_date'] }}</td>
+            <td>
+                <form action="/delete_trip/{{ trip['id'] }}" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
